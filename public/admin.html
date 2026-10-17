@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ta" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeFood Admin - Kitchen & Orders Manager | சமையலறை நிர்வாகி</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="admin-body">
+
+  <!-- Admin Header -->
+  <header class="admin-header">
+    <div class="admin-header-container">
+      <div class="admin-brand">
+        <img src="/assets/logo.png" alt="HomeFood">
+        <div>
+          <h2>HomeFood Admin <span class="admin-badge">Kitchen Hub</span></h2>
+          <span style="font-size:0.8rem; color:var(--text-muted);">உணவு தயாரிப்பு & நேரடி ஆர்டர் கட்டுப்பாட்டு அறை</span>
+        </div>
+      </div>
+
+      <div class="admin-actions">
+        <!-- Language Switcher -->
+        <button id="langToggleBtn" class="btn-lang">
+          🌐 <span id="currentLangLabel">தமிழ்</span>
+        </button>
+
+        <!-- Theme Switcher -->
+        <button id="themeToggleBtn" class="btn-theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- Customer Site Link -->
+        <a href="/" target="_blank" class="btn-account">
+          🌐 <span data-i18n="nav_home">View Website</span>
+        </a>
+
+        <!-- Logout -->
+        <button id="adminLogoutBtn" class="btn-account" style="cursor:pointer; color:var(--nonveg-red); border-color:#fca5a5;">
+          🚪 <span data-i18n="nav_logout">Logout</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Admin Main -->
+  <main class="admin-main">
+
+    <!-- KPI Analytics Cards -->
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-icon-wrap kpi-icon-orders">📋</div>
+        <div class="kpi-details">
+          <h4 data-i18n="kpi_today_orders">Total Orders</h4>
+          <div class="kpi-value" id="kpiTotalOrders">0</div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon-wrap kpi-icon-cooking">🍳</div>
+        <div class="kpi-details">
+          <h4 data-i18n="kpi_kitchen_active">Active in Kitchen</h4>
+          <div class="kpi-value" id="kpiActiveOrders" style="color:#d97706;">0</div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon-wrap kpi-icon-delivered">🛵</div>
+        <div class="kpi-details">
+          <h4 data-i18n="kpi_delivered">Delivered</h4>
+          <div class="kpi-value" id="kpiDeliveredOrders" style="color:#16a34a;">0</div>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-icon-wrap kpi-icon-revenue">💰</div>
+        <div class="kpi-details">
+          <h4 data-i18n="kpi_revenue">Total Revenue</h4>
+          <div class="kpi-value" id="kpiTotalRevenue" style="color:var(--primary);">₹0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admin Tabs -->
+    <div class="admin-tabs-nav">
+      <button class="admin-tab-btn active" id="tabBtnOrders" onclick="switchAdminTab('orders')">
+        🍲 <span data-i18n="tab_orders">Live Kitchen Orders</span>
+      </button>
+      <button class="admin-tab-btn" id="tabBtnMenu" onclick="switchAdminTab('menu')">
+        📋 <span data-i18n="tab_menu">Menu & Stock Manager</span>
+      </button>
+    </div>
+
+    <!-- TAB 1: LIVE KITCHEN ORDERS -->
+    <section id="adminOrdersSection">
+      <div class="orders-filter-bar">
+        <div class="filter-pills" id="orderStatusFilters">
+          <button class="pill-filter active" data-status="all" data-i18n="filter_all">All</button>
+          <button class="pill-filter" data-status="Received">📝 Received (ஆர்டர் பெறப்பட்டது)</button>
+          <button class="pill-filter" data-status="Preparing">🍳 Cooking (தயாராகிறது)</button>
+          <button class="pill-filter" data-status="OutForDelivery">🛵 Out for Delivery (புறப்பட்டது)</button>
+          <button class="pill-filter" data-status="Delivered">✅ Delivered (சேர்ந்தது)</button>
+        </div>
+
+        <div style="display:flex; align-items:center; gap:10px;">
+          <select id="adminAreaFilter" class="form-select" style="padding:7px 14px; width:auto;">
+            <option value="all">அனைத்து பகுதிகள் (All Areas)</option>
+            <option value="village">கிராமத்து ஆர்டர்கள் (Village)</option>
+            <option value="city">நகரத்து ஆர்டர்கள் (City)</option>
+          </select>
+          <button onclick="loadAdminOrders()" class="btn-account" style="cursor:pointer;" title="Refresh Orders">
+            🔄 புதுப்பிக்க (Refresh)
+          </button>
+        </div>
+      </div>
+
+      <!-- Orders Grid -->
+      <div class="orders-grid" id="adminOrdersGrid">
+        <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+          ஆர்டர்கள் ஏற்றப்படுகின்றன... (Loading orders...)
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 2: MENU & STOCK MANAGER -->
+    <section id="adminMenuSection" style="display:none;">
+      <div class="menu-admin-header">
+        <div>
+          <h3 style="color:var(--primary); font-size:1.4rem; font-weight:800;" data-i18n="tab_menu">Menu & Stock Manager</h3>
+          <p style="color:var(--text-muted); font-size:0.9rem;">உணவு விலை திருத்தம் மற்றும் "இருப்பு உண்டு / தீர்ந்துவிட்டது" கட்டுப்பாடு</p>
+        </div>
+        <button class="btn-add-dish" onclick="openAddDishModal()" data-i18n="btn_add_food">
+          + Add New Dish
+        </button>
+      </div>
+
+      <div class="menu-admin-grid" id="adminMenuGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Modal: Add New Food Dish -->
+  <div class="modal-overlay" id="addDishModal">
+    <div class="cart-modal-container" style="max-width:540px;">
+      <div class="modal-header">
+        <h3 id="modalDishTitle">🍛 + புதிய உணவு சேர்க்க (Add New Dish)</h3>
+        <button class="btn-close-modal" onclick="closeAddDishModal()">✕</button>
+      </div>
+
+      <form id="addDishForm" onsubmit="handleSaveDish(event)" style="padding:20px 24px;">
+        <div class="form-group">
+          <label>தமிழ் பெயர் (Tamil Name) *</label>
+          <input type="text" id="dishNameTa" class="form-input" placeholder="எ.கா: சூடான சாம்பார் வடை" required>
+        </div>
+
+        <div class="form-group">
+          <label>ஆங்கில பெயர் (English Name) *</label>
+          <input type="text" id="dishNameEn" class="form-input" placeholder="e.g. Hot Sambar Vada (2 pcs)" required>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>பிரிவு (Category) *</label>
+            <select id="dishCategory" class="form-select" required>
+              <option value="breakfast">Breakfast (காலை உணவு)</option>
+              <option value="meals">Lunch Meals (மதிய சாப்பாடு)</option>
+              <option value="dinner">Dinner (இரவு உணவு)</option>
+              <option value="snacks">Snacks (சிற்றுண்டி)</option>
+              <option value="drinks">Drinks & Coffee (பானங்கள்)</option>
+              <option value="pickles">🥭 Pickles (ஊறுகாய்)</option>
+              <option value="coconuts">🥥 Farm Coconuts (நாட்டு தேங்காய்)</option>
+              <option value="oils">🫒 Cold-Pressed Oils (மரச்செக்கு எண்ணெய்)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>விலை (Price in ₹) *</label>
+            <input type="number" id="dishPrice" class="form-input" placeholder="50" min="5" required>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+          <div class="form-group">
+            <label>வகை (Type)</label>
+            <select id="dishIsVeg" class="form-select">
+              <option value="true">🍃 சுத்த சைவம் (Pure Veg)</option>
+              <option value="false">🍗 அசைவம் (Non-Veg)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>புகைப்படம் (Photo)</label>
+            <select id="dishImage" class="form-select">
+              <option value="/assets/food/idli_vada.jpg">Idli & Vada Photo</option>
+              <option value="/assets/food/dosa.jpg">Golden Roast Dosa Photo</option>
+              <option value="/assets/food/meals.jpg">Banana Leaf Meals Photo</option>
+              <option value="/assets/food/biryani.jpg">Chettinad Biryani Photo</option>
+              <option value="/assets/food/parotta.jpg">Parotta & Salna Photo</option>
+              <option value="/assets/food/coffee.jpg">Degree Filter Coffee Photo</option>
+              <option value="/assets/food/pickle.jpg">🥭 Homemade Pickle Photo</option>
+              <option value="/assets/food/coconut.jpg">🥥 Fresh Coconut Photo</option>
+              <option value="/assets/food/oil.jpg">🫒 Cold-Pressed Oil Photo</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>தமிழ் விளக்கம் (Tamil Description)</label>
+          <input type="text" id="dishDescTa" class="form-input" placeholder="சுவையான மண்பானை சமையல்...">
+        </div>
+
+        <div class="form-group">
+          <label>ஆங்கில விளக்கம் (English Description)</label>
+          <input type="text" id="dishDescEn" class="form-input" placeholder="Prepared fresh with wood cold-pressed oil...">
+        </div>
+
+        <div style="margin-top:20px;">
+          <button type="submit" class="btn-place-order">
+            💾 சேமிக்க (Save Food Dish)
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/translations.js"></script>
+  <script src="/js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="ta" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeFood - Hunger, Handled | பாரம்பரிய வீட்டு உணவு</title>
+  <meta name="description" content="Authentic South Indian home cooked food prepared with cold-pressed oil and delivered hot on fresh banana leaf. Tamil & English, Village & City friendly. FSSAI No: 22426425000201.">
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Notification & Hotline Banner -->
+  <div class="top-banner">
+    <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+      <span class="top-banner-fssai">📜 <span data-i18n="fssai_label">FSSAI Lic No: 22426425000201</span></span>
+      <span>🌿 100% மரச்செக்கு எண்ணெய் • அஜினோமோட்டோ இல்லை (Zero Ajinomoto)</span>
+    </div>
+    <div style="display: flex; align-items: center; gap: 14px;">
+      <a href="tel:7200676767">📞 <span data-i18n="hotline_label">Order Hotline: 7200676767</span></a>
+      <a href="https://wa.me/917200676767" target="_blank" style="color:#86efac;">💬 WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="brand-wrapper">
+        <img src="/assets/logo.png" alt="HomeFood Hunger Handled Logo" class="brand-logo">
+        <div class="brand-text">
+          <h1 data-i18n="brand_title">HomeFood</h1>
+          <span data-i18n="brand_tagline">Hunger, Handled. From Our Family Table To Yours.</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <!-- Language Switcher -->
+        <button id="langToggleBtn" class="btn-lang" title="மொழி மாற்ற / Switch Language">
+          🌐 <span id="currentLangLabel">தமிழ்</span>
+        </button>
+
+        <!-- Light / Dark Mode Switcher -->
+        <button id="themeToggleBtn" class="btn-theme" title="கருப்பு/வெளிச்ச பயன்முறை (Dark/Light mode)">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <!-- Cart Button -->
+        <button id="openCartBtn" class="btn-header-cart">
+          🛒 <span data-i18n="nav_cart">Cart</span>
+          <span id="cartCountBadge" class="cart-badge">0</span>
+        </button>
+
+        <!-- Account / Login -->
+        <div id="userNavSection">
+          <a href="/login.html" class="btn-account">
+            👤 <span data-i18n="nav_login">Login</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badges-row">
+          <span class="hero-tag">🌾 <span data-i18n="g3_title">Traditional Grandma Recipes</span></span>
+          <span class="hero-tag">🥥 <span data-i18n="g1_title">Cold-Pressed Wood Oil</span></span>
+          <span class="hero-tag">🍃 வாழை இலை விருந்து (Banana Leaf)</span>
+        </div>
+
+        <h2 data-i18n="hero_headline">Authentic Home Cooked Food With Love</h2>
+        <p data-i18n="hero_subheadline">Fresh, healthy, and hygienic meals prepared with village tradition & cold-pressed oil. Delivered hot on fresh banana leaf!</p>
+
+        <div class="hero-action-buttons">
+          <a href="#menuSection" class="btn-primary-action">
+            🍲 <span data-i18n="view_menu_btn">Explore Village Menu</span>
+          </a>
+          <a href="https://wa.me/917200676767?text=வணக்கம்,%20எனக்கு%20ஹோம்%20புட்%20உணவு%20ஆர்டர்%20செய்ய%20வேண்டும்" target="_blank" class="btn-whatsapp-hero">
+            💬 <span data-i18n="whatsapp_order">Order via WhatsApp</span>
+          </a>
+          <a href="tel:7200676767" class="btn-call-hero">
+            📞 <span data-i18n="call_to_order">Call: 7200676767</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <img src="/assets/food/meals.jpg" alt="South Indian Traditional Banana Leaf Meal" class="hero-banner-img">
+        <div class="hero-floating-seal">
+          <span class="seal-icon">🏆</span>
+          <div>
+            <strong>100% Home Cooked</strong>
+            <small>FSSAI: 22426425000201</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Step Simple Order Guide (For Village & City Users) -->
+  <section class="how-it-works-section">
+    <div class="section-header-centered">
+      <h3 data-i18n="how_it_works_title">How HomeFood Works</h3>
+      <p>மிக எளிதாக 3 படிகளில் சுடச்சுட வீட்டு சாப்பாடு உங்கள் கைகளில்!</p>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon-bubble">🍲</div>
+        <h4 data-i18n="how_step_1_title">1. Pick Your Dish</h4>
+        <p data-i18n="how_step_1_desc">Browse authentic dishes cooked fresh like home.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon-bubble">📍</div>
+        <h4 data-i18n="how_step_2_title">2. Tell Us Your Address</h4>
+        <p data-i18n="how_step_2_desc">Village or city, near temple or landmark - we reach you.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon-bubble">🛵</div>
+        <h4 data-i18n="how_step_3_title">3. Eat Fresh & Hot</h4>
+        <p data-i18n="how_step_3_desc">Delivered piping hot on banana leaf, safe and pure.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menuSection" class="menu-section">
+    <div class="section-header-centered">
+      <h3 data-i18n="nav_menu">Our Food</h3>
+      <p>கைமணக்கும் சுவையான சமையல் • சுடச்சுட தயாரிப்பு</p>
+    </div>
+
+    <!-- Search and Controls -->
+    <div class="menu-controls-bar">
+      <div class="search-and-toggles">
+        <div class="search-box-wrapper">
+          <span class="search-icon">🔍</span>
+          <input type="text" id="foodSearchInput" placeholder="Search food (e.g., Idli, Meals, Dosa, Biryani)..." data-i18n-placeholder="search_placeholder">
+        </div>
+
+        <div class="filter-toggles-row">
+          <label class="toggle-switch-pill">
+            <input type="checkbox" id="vegFilterCheckbox">
+            <span>🍃 <span data-i18n="veg_only">Pure Veg Only</span></span>
+          </label>
+        </div>
+      </div>
+
+      <!-- Categories Filter Tabs -->
+      <div class="category-tabs-scroll" id="categoryTabs">
+        <button class="cat-tab-btn active" data-cat="all">🍽️ <span data-i18n="cat_all">All Items</span></button>
+        <button class="cat-tab-btn" data-cat="breakfast">🥞 <span data-i18n="cat_breakfast">Breakfast (காலை)</span></button>
+        <button class="cat-tab-btn" data-cat="meals">🍛 <span data-i18n="cat_meals">Lunch Meals (மதியம்)</span></button>
+        <button class="cat-tab-btn" data-cat="dinner">🫓 <span data-i18n="cat_dinner">Dinner (இரவு)</span></button>
+        <button class="cat-tab-btn" data-cat="snacks">🥟 <span data-i18n="cat_snacks">Snacks (சிற்றுண்டி)</span></button>
+        <button class="cat-tab-btn" data-cat="drinks">☕ <span data-i18n="cat_drinks">Drinks & Coffee</span></button>
+        <button class="cat-tab-btn" data-cat="pickles">🥭 <span data-i18n="cat_pickles">Homemade Pickles</span></button>
+        <button class="cat-tab-btn" data-cat="coconuts">🥥 <span data-i18n="cat_coconuts">Farm Coconuts</span></button>
+        <button class="cat-tab-btn" data-cat="oils">🫒 <span data-i18n="cat_oils">Cold-Pressed Oils</span></button>
+      </div>
+    </div>
+
+    <!-- Food Items Grid -->
+    <div class="food-grid" id="foodGrid">
+      <!-- Injected by JavaScript -->
+      <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: var(--text-muted);">
+        <p>Loading fresh home foods... / உணவுகள் ஏற்றப்படுகின்றன...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Live Order Tracking Section -->
+  <section id="trackSection" class="track-section">
+    <div class="track-card">
+      <div style="text-align: center;">
+        <h3 style="font-size: 1.5rem; color: var(--primary); font-weight: 800; margin-bottom: 6px;" data-i18n="track_title">Track Your Order</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">உங்கள் ஆர்டர் எண் அல்லது செல்போன் எண்ணை உள்ளிட்டு சமையல் நிலவரத்தை அறியுங்கள்</p>
+      </div>
+
+      <div class="track-form">
+        <input type="text" id="trackInput" class="track-input" placeholder="Enter Order Number (e.g. HF-1001) or Mobile..." data-i18n-placeholder="track_placeholder">
+        <button id="trackBtn" class="btn-track" data-i18n="track_btn">Track Now</button>
+      </div>
+
+      <div id="trackResultWrap" class="track-result-wrap">
+        <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 12px;">
+          <div>
+            <h4 id="trackOrderNum" style="color: var(--primary); font-size: 1.2rem; font-weight: 800;">HF-1001</h4>
+            <span id="trackCustomerName" style="color: var(--text-muted); font-size: 0.9rem;">Muthu Vel</span>
+          </div>
+          <span id="trackStatusBadge" style="background: var(--accent); color: white; padding: 5px 12px; border-radius: var(--radius-full); font-weight: 700; font-size: 0.85rem;">Cooking</span>
+        </div>
+
+        <div class="order-timeline">
+          <div class="order-timeline-progress" id="trackProgressBar" style="width: 33%;"></div>
+          
+          <div class="timeline-step" id="stepReceived">
+            <div class="timeline-circle">📝</div>
+            <h5 data-i18n="status_received">Received</h5>
+          </div>
+          <div class="timeline-step" id="stepPreparing">
+            <div class="timeline-circle">🍳</div>
+            <h5 data-i18n="status_preparing">In Kitchen</h5>
+          </div>
+          <div class="timeline-step" id="stepOutForDelivery">
+            <div class="timeline-circle">🛵</div>
+            <h5 data-i18n="status_outfordelivery">On the Way</h5>
+          </div>
+          <div class="timeline-step" id="stepDelivered">
+            <div class="timeline-circle">🏡</div>
+            <h5 data-i18n="status_delivered">Delivered</h5>
+          </div>
+        </div>
+
+        <div id="trackOrderDetails" style="background: var(--bg-primary); padding: 14px; border-radius: var(--radius-md); font-size: 0.9rem; color: var(--text-main);">
+          <!-- Order details inserted here -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trust & Hygiene Guarantee Section -->
+  <section class="guarantee-section">
+    <div class="guarantee-container">
+      <div class="section-header-centered">
+        <h3 data-i18n="guarantee_title">Why Village & City Families Trust Us</h3>
+        <p>100% தூய்மையான, ஆரோக்கியமான வீட்டு உணவுக்கான உத்தரவாதம்</p>
+      </div>
+
+      <div class="guarantee-grid">
+        <div class="guarantee-card">
+          <div class="guarantee-icon">🛢️</div>
+          <h4 data-i18n="g1_title">Cold-Pressed Wood Oil</h4>
+          <p data-i18n="g1_desc">No refined oils. Only pure sesame and groundnut wood-pressed oils.</p>
+        </div>
+        <div class="guarantee-card">
+          <div class="guarantee-icon">🚫</div>
+          <h4 data-i18n="g2_title">Zero Artificial Chemicals</h4>
+          <p data-i18n="g2_desc">No tasting salt (Ajinomoto), no synthetic colors, no preservatives.</p>
+        </div>
+        <div class="guarantee-card">
+          <div class="guarantee-icon">👵</div>
+          <h4 data-i18n="g3_title">Traditional Grandma Recipes</h4>
+          <p data-i18n="g3_desc">Authentic village home taste that is soft on the stomach.</p>
+        </div>
+        <div class="guarantee-card">
+          <div class="guarantee-icon">📜</div>
+          <h4 data-i18n="g4_title">FSSAI Certified 22426425000201</h4>
+          <p data-i18n="g4_desc">Strict hygiene, clean drinking water, and sterilized utensils.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Cart Modal Drawer -->
+  <div class="modal-overlay" id="cartModalOverlay">
+    <div class="cart-modal-container">
+      <div class="modal-header">
+        <h3 data-i18n="cart_title">🛒 Your Food Basket</h3>
+        <button id="closeCartBtn" class="btn-close-modal">✕</button>
+      </div>
+
+      <div class="cart-items-list" id="cartItemsList">
+        <!-- Rendered by JS -->
+      </div>
+
+      <div class="cart-checkout-form" id="checkoutSection">
+        <h4 style="margin: 16px 0 10px; color: var(--primary); font-weight: 800;" data-i18n="delivery_details">Delivery Details</h4>
+
+        <div class="form-group">
+          <label data-i18n="lbl_name">Your Full Name</label>
+          <input type="text" id="custName" class="form-input" placeholder="உங்கள் பெயர் (e.g. Arumugam / Priya)" required>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_phone">10-Digit Mobile Number</label>
+          <input type="tel" id="custPhone" class="form-input" placeholder="9876543210" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_location_type">Area Type</label>
+          <select id="custAreaType" class="form-select">
+            <option value="village" data-i18n="opt_village">Village Area (கிராமம் - இலவச டெலிவரி)</option>
+            <option value="city" data-i18n="opt_city">City / Town (நகரம்)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_address">Street / House / Delivery Address</label>
+          <input type="text" id="custAddress" class="form-input" placeholder="தெரு / வீடு / கதவு எண்..." required>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_landmark">Nearby Landmark</label>
+          <input type="text" id="custLandmark" class="form-input" placeholder="கோவில் அருகில் / பள்ளி / பஸ் ஸ்டாப்...">
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_payment">Payment Method</label>
+          <select id="custPayment" class="form-select">
+            <option value="cash_on_delivery" data-i18n="pay_cod">Cash on Delivery (சாப்பாடு வரும் போது பணம்)</option>
+            <option value="upi_qr" data-i18n="pay_upi">UPI QR / GPay / PhonePe</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="lbl_instructions">Special Instructions</label>
+          <input type="text" id="custInstructions" class="form-input" placeholder="கூடுதல் சாம்பார் / காரம் குறைவாக...">
+        </div>
+
+        <!-- Bill Breakdown -->
+        <div class="bill-breakdown">
+          <div class="bill-row">
+            <span data-i18n="cart_subtotal">Food Subtotal</span>
+            <span id="billSubtotal">₹0</span>
+          </div>
+          <div class="bill-row">
+            <span data-i18n="cart_delivery">Delivery Charge</span>
+            <span id="billDelivery">₹0</span>
+          </div>
+          <div class="bill-row total-row">
+            <span data-i18n="cart_total">Total Amount</span>
+            <span id="billTotal" style="color: var(--primary);">₹0</span>
+          </div>
+        </div>
+
+        <button id="submitOrderBtn" class="btn-place-order">
+          ✅ <span data-i18n="btn_confirm_order">Confirm & Place Order</span>
+        </button>
+
+        <button id="whatsappCheckoutBtn" class="btn-whatsapp-checkout">
+          💬 <span data-i18n="btn_order_whatsapp">Send Order on WhatsApp Directly</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <h4 data-i18n="brand_title">HomeFood</h4>
+        <p data-i18n="brand_tagline">Hunger, Handled. From Our Family Table To Yours.</p>
+        <p style="font-size: 0.85rem; color: var(--text-light);">
+          📜 <strong>FSSAI: 22426425000201</strong><br>
+          📞 <strong>Order Helpline: 7200676767</strong><br>
+          ⏰ நேரம்: காலை 7:00 மணி முதல் இரவு 10:30 மணி வரை (7 AM - 10:30 PM)
+        </p>
+      </div>
+
+      <div class="footer-col">
+        <h5>விரைவு இணைப்புகள் (Quick Links)</h5>
+        <ul class="footer-links">
+          <li><a href="#menuSection" data-i18n="nav_menu">Our Food</a></li>
+          <li><a href="#trackSection" data-i18n="nav_track">Track Order</a></li>
+          <li><a href="/login.html" data-i18n="nav_login">Login / Account</a></li>
+          <li><a href="/admin.html" style="color: var(--accent); font-weight: 700;">🔐 <span data-i18n="nav_admin">Admin Portal</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>தொடர்புக்கு (Contact Us)</h5>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.7;">
+          📍 கிராமத்து ஹோம் கிச்சன் (HomeFood Central Kitchen)<br>
+          மெயின் ரோடு, மதுரை - திண்டுக்கல் பிரதான சாலை.<br>
+          📞 தொலைபேசி: <a href="tel:7200676767" style="color: var(--primary); font-weight: 700;">7200676767</a><br>
+          💬 வாட்ஸ்அப்: <a href="https://wa.me/917200676767" style="color: var(--whatsapp-green); font-weight: 700;">7200676767</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom-line">
+      <div>© 2026 HomeFood. Hunger, Handled. All Rights Reserved.</div>
+      <div>உணவு பாதுகாப்பு உரிமம்: 22426425000201 • கைமணக்கும் சமையல்</div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="/js/translations.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

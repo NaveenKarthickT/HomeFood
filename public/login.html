@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ta" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HomeFood - Login | வாடிக்கையாளர் & நிர்வாகி உள்நுழைவு</title>
+  <link rel="icon" href="/assets/logo.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&family=Noto+Sans+Tamil:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    .auth-page-container {
+      min-height: calc(100vh - 120px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+    }
+
+    .auth-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      max-width: 480px;
+      width: 100%;
+      padding: 34px 28px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .auth-header img {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      margin-bottom: 12px;
+      border: 3px solid var(--veg-green);
+    }
+
+    .role-tabs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      background: var(--bg-primary);
+      padding: 6px;
+      border-radius: var(--radius-full);
+      margin-bottom: 24px;
+      border: 1px solid var(--border-color);
+    }
+
+    .role-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 14px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .role-tab-btn.active {
+      background: var(--primary);
+      color: #ffffff;
+      box-shadow: 0 4px 10px rgba(30, 92, 43, 0.25);
+    }
+
+    .demo-box {
+      background: var(--primary-light);
+      border: 1px dashed var(--primary);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-top: 18px;
+      text-align: center;
+    }
+
+    .btn-demo-quick {
+      background: var(--accent);
+      color: #ffffff;
+      border: none;
+      padding: 10px 16px;
+      border-radius: var(--radius-full);
+      font-weight: 700;
+      font-size: 0.88rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-demo-quick:hover {
+      background: var(--accent-hover);
+    }
+
+    .auth-switch-text {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .auth-switch-text a {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .auth-switch-text a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Notification -->
+  <div class="top-banner">
+    <div>📜 FSSAI Lic No: 22426425000201 • 🌿 100% Home Cooked Food</div>
+    <div>📞 Order Hotline: <a href="tel:7200676767">7200676767</a></div>
+  </div>
+
+  <!-- Header -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="/" class="brand-wrapper">
+        <img src="/assets/logo.png" alt="HomeFood Logo" class="brand-logo">
+        <div class="brand-text">
+          <h1>HomeFood</h1>
+          <span>Hunger, Handled.</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <button id="langToggleBtn" class="btn-lang">
+          🌐 <span id="currentLangLabel">தமிழ்</span>
+        </button>
+
+        <button id="themeToggleBtn" class="btn-theme">
+          <span id="themeIcon">🌙</span>
+        </button>
+
+        <a href="/" class="btn-account">
+          🏠 <span>முகப்பு (Home)</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Login Main Container -->
+  <div class="auth-page-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <img src="/assets/logo.png" alt="HomeFood Logo">
+        <h2 id="loginMainHeading" style="color:var(--primary); font-size:1.5rem; font-weight:800;">
+          உள்நுழைவு (Login)
+        </h2>
+        <p id="loginSubHeading" style="color:var(--text-muted); font-size:0.9rem;">
+          வாடிக்கையாளர் அல்லது சமையலறை நிர்வாகி கணக்கு
+        </p>
+      </div>
+
+      <!-- Two Distinct Login Roles Switcher -->
+      <div class="role-tabs">
+        <button class="role-tab-btn active" id="tabUserLogin" onclick="switchLoginRole('user')">
+          👤 வாடிக்கையாளர் (User)
+        </button>
+        <button class="role-tab-btn" id="tabAdminLogin" onclick="switchLoginRole('admin')">
+          🔐 நிர்வாகி (Admin)
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="handleLoginSubmit(event)">
+        <div class="form-group">
+          <label id="lblUsername">செல்போன் எண் (Mobile Number)</label>
+          <input type="text" id="loginPhone" class="form-input" placeholder="9876543210 அல்லது admin" required>
+        </div>
+
+        <div class="form-group">
+          <label id="lblPassword">கடவுச்சொல் (Password)</label>
+          <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+        </div>
+
+        <div style="margin-top: 20px;">
+          <button type="submit" id="btnSubmitLogin" class="btn-place-order" style="padding:12px;">
+            🚀 உள்நுழைக (Sign In)
+          </button>
+        </div>
+      </form>
+
+      <!-- Registration Form (Hidden by default) -->
+      <form id="registerForm" style="display:none;" onsubmit="handleRegisterSubmit(event)">
+        <div class="form-group">
+          <label>உங்கள் பெயர் (Full Name)</label>
+          <input type="text" id="regName" class="form-input" placeholder="எ.கா: முத்துவேல்" required>
+        </div>
+
+        <div class="form-group">
+          <label>செல்போன் எண் (Mobile Number)</label>
+          <input type="tel" id="regPhone" class="form-input" placeholder="9876543210" maxlength="10" required>
+        </div>
+
+        <div class="form-group">
+          <label>கடவுச்சொல் (Password)</label>
+          <input type="password" id="regPassword" class="form-input" placeholder="குறைந்தது 4 எழுத்துகள்" required>
+        </div>
+
+        <div class="form-group">
+          <label>வசிக்கும் பகுதி (Area Type)</label>
+          <select id="regVillageOrCity" class="form-select">
+            <option value="village">கிராமம் (Village)</option>
+            <option value="city">நகரம் / டவுன் (City)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>வீட்டு முகவரி (Address)</label>
+          <input type="text" id="regAddress" class="form-input" placeholder="தெரு / கோவில் அருகில்...">
+        </div>
+
+        <div style="margin-top: 20px;">
+          <button type="submit" class="btn-place-order" style="padding:12px;">
+            📝 கணக்கை பதிவு செய்க (Register)
+          </button>
+        </div>
+      </form>
+
+      <!-- Switch between Login and Register -->
+      <div class="auth-switch-text" id="switchFormContainer">
+        <span id="switchPrompt">புதிய வாடிக்கையாளரா?</span>
+        <a id="switchFormBtn" onclick="toggleAuthMode()">இங்கு பதிவு செய்யுங்கள் (Register)</a>
+      </div>
+
+      <!-- Quick 1-Click Demo Login (Village Friendly) -->
+      <div class="demo-box" id="demoBoxContainer">
+        <strong style="color:var(--primary); font-size:0.92rem; display:block;">
+          ⚡ எளிய 1-கிளிக் சோதனை உள்நுழைவு (Instant 1-Click Demo)
+        </strong>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-top:3px;" id="demoDescription">
+          கிராமத்து வாடிக்கையாளராக உடனடி சோதனை:
+        </p>
+        <button type="button" class="btn-demo-quick" onclick="quickDemoLogin()">
+          ⚡ <span id="demoBtnLabel">வாடிக்கையாளர் நேரடி உள்நுழைவு (Demo User)</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <script src="/js/translations.js"></script>
+  <script src="/js/auth.js"></script>
+</body>
+</html>
