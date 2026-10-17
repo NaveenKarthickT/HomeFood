@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -20,10 +21,38 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Connect to MongoDB
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('Connected to MongoDB: homefood'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Database connection with caching for serverless functions (Vercel)
+let cachedDb = null;
+async function connectToDatabase() {
+  if (cachedDb && mongoose.connection.readyState >= 1) {
+    return cachedDb;
+  }
+  try {
+    cachedDb = await mongoose.connect(MONGO_URI, {
+      bufferCommands: false,
+    });
+    console.log('Connected to MongoDB');
+    return cachedDb;
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+    throw err;
+  }
+}
+
+// Initial connection for persistent servers
+connectToDatabase().catch(err => console.error('Initial DB connect failed:', err.message));
+
+// Middleware to ensure DB is connected on each incoming serverless request
+app.use(async (req, res, next) => {
+  if (mongoose.connection.readyState < 1) {
+    try {
+      await connectToDatabase();
+    } catch (err) {
+      return res.status(500).json({ success: false, message: 'Database connection error' });
+    }
+  }
+  next();
+});
 
 // Helper: Authentication Middleware
 function authenticateToken(req, res, next) {
@@ -522,12 +551,17 @@ app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
 
-// Start Server
-app.listen(PORT, () => {
-  console.log(`=================================================`);
-  console.log(`🍛 HomeFood Server is running at http://localhost:${PORT}`);
-  console.log(`🌿 User Website: http://localhost:${PORT}/`);
-  console.log(`🔐 Login Portal: http://localhost:${PORT}/login.html`);
-  console.log(`🛠️ Admin Portal: http://localhost:${PORT}/admin.html`);
-  console.log(`=================================================`);
-});
+// Start Server if run directly (local development)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`=================================================`);
+    console.log(`🍛 HomeFood Server is running at http://localhost:${PORT}`);
+    console.log(`🌿 User Website: http://localhost:${PORT}/`);
+    console.log(`🔐 Login Portal: http://localhost:${PORT}/login.html`);
+    console.log(`🛠️ Admin Portal: http://localhost:${PORT}/admin.html`);
+    console.log(`=================================================`);
+  });
+}
+
+// Export for Vercel Serverless
+module.exports = app;
