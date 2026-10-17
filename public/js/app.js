@@ -319,8 +319,34 @@ function saveCart() {
 
 function updateCartBadge() {
   const count = cart.reduce((sum, item) => sum + item.quantity, 0);
-  cartCountBadge.textContent = count;
-  cartCountBadge.style.display = count > 0 ? 'inline-block' : 'none';
+  const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  // Desktop header badge
+  if (cartCountBadge) {
+    cartCountBadge.textContent = count;
+    cartCountBadge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+
+  // Mobile bottom bar badge
+  const mobCartCountBadge = document.getElementById('mobCartCountBadge');
+  if (mobCartCountBadge) {
+    mobCartCountBadge.textContent = count;
+    mobCartCountBadge.style.display = count > 0 ? 'inline-block' : 'none';
+  }
+
+  // Mobile floating quick cart pill
+  const mobileFloatingCart = document.getElementById('mobileFloatingCart');
+  const mobFloatCount = document.getElementById('mobFloatCount');
+  const mobFloatTotal = document.getElementById('mobFloatTotal');
+  if (mobileFloatingCart && mobFloatCount && mobFloatTotal) {
+    if (count > 0) {
+      mobFloatCount.textContent = currentLang === 'ta' ? `${count} உணவுகள்` : `${count} item${count > 1 ? 's' : ''}`;
+      mobFloatTotal.textContent = `₹${total}`;
+      mobileFloatingCart.classList.add('active');
+    } else {
+      mobileFloatingCart.classList.remove('active');
+    }
+  }
 }
 
 function renderCart() {
@@ -599,21 +625,57 @@ function setupEventListeners() {
     renderFoods();
   });
 
-  // Cart Modal Toggle
-  openCartBtn.addEventListener('click', () => {
+  // Cart Modal Toggle (Desktop & Mobile)
+  function openCartModal() {
     renderCart();
     cartModalOverlay.classList.add('open');
-  });
+    document.body.style.overflow = 'hidden';
+  }
 
-  closeCartBtn.addEventListener('click', () => {
+  function closeCartModal() {
     cartModalOverlay.classList.remove('open');
-  });
+    document.body.style.overflow = '';
+  }
+
+  openCartBtn.addEventListener('click', openCartModal);
+  closeCartBtn.addEventListener('click', closeCartModal);
 
   cartModalOverlay.addEventListener('click', (e) => {
     if (e.target === cartModalOverlay) {
-      cartModalOverlay.classList.remove('open');
+      closeCartModal();
     }
   });
+
+  // Mobile Bottom Bar Cart & Floating Quick Cart
+  const mobNavCart = document.getElementById('mobNavCart');
+  if (mobNavCart) {
+    mobNavCart.addEventListener('click', openCartModal);
+  }
+
+  const mobFloatViewBtn = document.getElementById('mobFloatViewBtn');
+  if (mobFloatViewBtn) {
+    mobFloatViewBtn.addEventListener('click', openCartModal);
+  }
+
+  const mobileFloatingCart = document.getElementById('mobileFloatingCart');
+  if (mobileFloatingCart) {
+    mobileFloatingCart.addEventListener('click', (e) => {
+      if (!e.target.closest('#mobFloatViewBtn')) {
+        openCartModal();
+      }
+    });
+  }
+
+  // Mobile Search Navigation Button
+  const mobNavSearch = document.getElementById('mobNavSearch');
+  if (mobNavSearch) {
+    mobNavSearch.addEventListener('click', () => {
+      if (foodSearchInput) {
+        foodSearchInput.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => foodSearchInput.focus(), 350);
+      }
+    });
+  }
 
   if (custAreaType) {
     custAreaType.addEventListener('change', calculateTotals);

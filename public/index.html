@@ -260,6 +260,7 @@
   <!-- Cart Modal Drawer -->
   <div class="modal-overlay" id="cartModalOverlay">
     <div class="cart-modal-container">
+      <div class="modal-drag-handle"></div>
       <div class="modal-header">
         <h3 data-i18n="cart_title">🛒 Your Food Basket</h3>
         <button id="closeCartBtn" class="btn-close-modal">✕</button>
@@ -379,6 +380,49 @@
       <div>உணவு பாதுகாப்பு உரிமம்: 22426425000201 • கைமணக்கும் சமையல்</div>
     </div>
   </footer>
+
+  <!-- Mobile Bottom Navigation Bar (Visible only on mobile screens <= 768px) -->
+  <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+    <a href="#menuSection" class="mobile-nav-item active" id="mobNavMenu">
+      <span class="mobile-nav-icon">🍲</span>
+      <span class="mobile-nav-label" data-i18n="nav_menu">Our Food</span>
+    </a>
+    <button type="button" class="mobile-nav-item" id="mobNavSearch">
+      <span class="mobile-nav-icon">🔍</span>
+      <span class="mobile-nav-label">Search</span>
+    </button>
+    <a href="#trackSection" class="mobile-nav-item" id="mobNavTrack">
+      <span class="mobile-nav-icon">🛵</span>
+      <span class="mobile-nav-label" data-i18n="nav_track">Track</span>
+    </a>
+    <a href="https://wa.me/917200676767" target="_blank" class="mobile-nav-item mob-nav-wa" id="mobNavWa">
+      <span class="mobile-nav-icon">💬</span>
+      <span class="mobile-nav-label">WhatsApp</span>
+    </a>
+    <button type="button" class="mobile-nav-item mob-nav-cart" id="mobNavCart">
+      <div class="mob-cart-icon-wrap">
+        <span class="mobile-nav-icon">🛒</span>
+        <span id="mobCartCountBadge" class="mob-cart-badge">0</span>
+      </div>
+      <span class="mobile-nav-label" data-i18n="nav_cart">Cart</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Floating Quick Cart Bar (Pops up above bottom nav when items in cart) -->
+  <div id="mobileFloatingCart" class="mobile-floating-cart">
+    <div class="mobile-floating-cart-inner">
+      <div class="mobile-floating-cart-info">
+        <span class="mob-float-icon">🛒</span>
+        <div>
+          <strong id="mobFloatCount">0 items</strong>
+          <span id="mobFloatTotal" class="mob-float-price">₹0</span>
+        </div>
+      </div>
+      <button id="mobFloatViewBtn" class="mob-float-btn">
+        <span data-i18n="nav_cart">View Basket</span> →
+      </button>
+    </div>
+  </div>
 
   <!-- Toast Notification Container -->
   <div class="toast-container" id="toastContainer"></div>
